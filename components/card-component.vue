@@ -44,7 +44,12 @@ export default {
       this.$root.$emit("bv::show::modal", card.id.toString());
     },
     editCard(){
-      
+      this.$store.commit('editTitle', this.card.id, this.title)
+    }
+  },
+  watch: {
+    title(){
+      this.editCard()
     }
   }
 };
