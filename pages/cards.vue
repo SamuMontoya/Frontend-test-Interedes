@@ -6,14 +6,11 @@
         <card-component :card="card"/>
       </b-col>
     </b-row>
-    <create-compnent />
   </div>
 </template>
 
 <script>
-import createCompnent from '~/components/create-compnent.vue';
 export default {
-  components: { createCompnent },
   name: "cards",
   methods: {
     async loadDataCards() {
