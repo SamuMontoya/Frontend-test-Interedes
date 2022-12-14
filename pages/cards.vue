@@ -6,6 +6,7 @@
         <card-component :card="card"/>
       </b-col>
     </b-row>
+    <create-component />
   </div>
 </template>
 
