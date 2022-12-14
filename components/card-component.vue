@@ -28,12 +28,6 @@ export default {
     showModal(card) {
       this.$root.$emit("bv::show::modal", card.id.toString());
     },
-    
-    
-    setLocal() {
-      (this.local.title = this.card.title), (this.local.body = this.card.title);
-    },
-    
   },
 };
 </script>

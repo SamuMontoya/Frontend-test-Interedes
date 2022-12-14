@@ -20,7 +20,6 @@ export default {
   },
   methods: {
     createCard() {
-      console.log(this.newCard);
       this.$root.$emit("bv::show::modal", this.newCard.id.toString());
     }
   }
