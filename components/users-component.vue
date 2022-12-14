@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <modal-component :subject="subject" />
+    <modalUsers-component :subject="subject" />
 
     <h1 class="mt-5 text-center">Users</h1>
     <b
@@ -26,14 +26,11 @@
 </template>
 
 <script>
-import modalComponent from './modal-component.vue';
 export default {
-  components: { modalComponent },
   name: "users-component",
   data() {
     return {
       response: null,
-      title: 'Hello Modal',
       subject: {
         name: null,
         username: null,
