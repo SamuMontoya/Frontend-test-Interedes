@@ -10,9 +10,7 @@
     >
       <b-card-text> {{ card.body }} </b-card-text>
       <b-button
-        @click="
-          showModal(card);
-          editCard();"
+        @click="showModal(card);"
           block
         variant="primary"
         >Edit</b-button
@@ -72,11 +70,24 @@ export default {
       this.$root.$emit("bv::hide::modal", card.id.toString());
     },
     editCard() {
-      this.$store.commit("editTitle", this.local);
+      let isPosted = this.postApi()
+      if(isPosted){
+        this.$store.commit("editTitle", this.local);
+      }
     },
     setLocal() {
       (this.local.title = this.card.title), (this.local.body = this.card.title);
     },
+    async postApi (){
+      const api = "https://jsonplaceholder.typicode.com/posts";
+      const response = await this.$axios.post(api, this.local);
+      console.log(response.status)
+      if (response.status === 201){
+        return true
+      } else{
+        return false
+      }
+    }
   },
 };
 </script>

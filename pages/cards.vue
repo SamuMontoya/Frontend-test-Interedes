@@ -18,7 +18,6 @@ export default {
       const response = await this.$axios.get(api);
       let r = response.data;
       r = r.splice(94);
-      console.log(r);
       this.$store.commit("setCards", r);
     }
   },
