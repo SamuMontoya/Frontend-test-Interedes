@@ -17,10 +17,7 @@
         class="mt-2"
         block
         :variant="card.flag ? 'success' : 'primary'"
-        @click="
-          editCard();
-          hideModal(card);
-        "
+        @click="card.flag ? createCard() : editCard(); hideModal(card);"
         >{{card.flag ? 'Create' : 'Edit'}}</b-button
       >
     </b-modal>
@@ -36,6 +33,7 @@ export default {
         title: this.card.title,
         body: this.card.body,
         card: this.card,
+        id: new Date().getTime()
       },
     };
   },
@@ -58,6 +56,16 @@ export default {
     },
     hideModal(card) {
       this.$root.$emit("bv::hide::modal", card.id.toString());
+    },
+    createCard(newCard){
+      let isPosted = this.postApi();
+      if (isPosted) {6
+        this.getId()
+        this.$store.commit('addCard', this.local)
+      }
+    },
+    getId() {
+      this.local.id = new Date().getTime();
     },
   }
 }

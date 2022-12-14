@@ -14,5 +14,12 @@ export const mutations = {
     let index = state.cards.indexOf(box)
     state.cards[index].title = local.title
     state.cards[index].body = local.body
+  },
+  addCard(state, card){
+    state.cards.push({
+      id: card.id,
+      title: card.title,
+      body: card.body
+    })
   }
 };
