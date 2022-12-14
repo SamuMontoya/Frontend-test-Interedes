@@ -13,7 +13,8 @@ export default {
         newCard: {
             id: 0,
             title: 'New Card',
-            body: 'This is the new card body'
+            body: 'This is the new card body',
+            flag: true
         }
     }
   },

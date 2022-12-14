@@ -16,12 +16,12 @@
       <b-button
         class="mt-2"
         block
-        variant="primary"
+        :variant="card.flag ? 'success' : 'primary'"
         @click="
           editCard();
           hideModal(card);
         "
-        >Edit</b-button
+        >{{card.flag ? 'Create' : 'Edit'}}</b-button
       >
     </b-modal>
 </template>
