@@ -9,48 +9,74 @@
       class="mb-3"
     >
       <b-card-text> {{ card.body }} </b-card-text>
-      <b-button class="ml-5" @click="showModal(card); editCard()" variant="primary">Edit</b-button>
-      <b-button class="ml-5" @click="deleteCard" variant="danger">Delete</b-button>
+      <b-button
+        @click="
+          showModal(card);
+          editCard();"
+          block
+        variant="primary"
+        >Edit</b-button
+      >
+      <b-button block @click="deleteCard" variant="danger">Delete</b-button>
     </b-card>
 
-    <b-modal :id="card.id.toString()" :title="card.title">
-    <b-row class="mx-2 mt-2">
-      <label>Title</label>
-      <b-form-input v-model="title" type="text">{{title}}</b-form-input>
-    </b-row>
-    <b-row class="mx-2 mt-2">
-      <label>Body</label>
-      <b-form-textarea v-model="body" rows="3" max-rows="6" type="text">{{body}}</b-form-textarea>
-    </b-row>
-  </b-modal>
+    <b-modal hide-footer :id="card.id.toString()" :title="card.title">
+      <b-row class="mx-2 mt-2">
+        <label>Title</label>
+        <b-form-input v-model="local.title" type="text"></b-form-input>
+      </b-row>
+      <b-row class="mx-2 mt-2">
+        <label>Body</label>
+        <b-form-textarea
+          v-model="local.body"
+          rows="3"
+          max-rows="6"
+          type="text"
+        ></b-form-textarea>
+      </b-row>
+      <b-button
+        class="mt-2"
+        block
+        variant="primary"
+        @click="
+          editCard();
+          hideModal(card);
+        "
+        >Edit</b-button
+      >
+    </b-modal>
   </div>
 </template>
 
 <script>
 export default {
   name: "card-component",
-  props: ['card'],
-  data(){
-    return{
-      title: this.card.title,
-      body: this.card.body
-    }
+  props: ["card"],
+  data() {
+    return {
+      local: {
+        title: this.card.title,
+        body: this.card.body,
+        card: this.card,
+      },
+    };
   },
-  methods:{
-    deleteCard(){
-      this.$store.commit('deleteCard', this.card)
+  methods: {
+    deleteCard() {
+      this.$store.commit("deleteCard", this.card);
     },
     showModal(card) {
       this.$root.$emit("bv::show::modal", card.id.toString());
     },
-    editCard(){
-      this.$store.commit('editTitle', this.card.id, this.title)
-    }
+    hideModal(card) {
+      this.$root.$emit("bv::hide::modal", card.id.toString());
+    },
+    editCard() {
+      this.$store.commit("editTitle", this.local);
+    },
+    setLocal() {
+      (this.local.title = this.card.title), (this.local.body = this.card.title);
+    },
   },
-  watch: {
-    title(){
-      this.editCard()
-    }
-  }
 };
 </script>
